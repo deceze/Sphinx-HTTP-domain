@@ -1,3 +1,7 @@
+# Sphinx HTTP Domain
+
+## Description
+
 Sphinx plugin to add an HTTP domain, allowing the documentation of RESTful HTTP methods.
 
     .. http:method:: GET /api/foo/bar/:id/:slug
@@ -7,7 +11,9 @@ Sphinx plugin to add an HTTP domain, allowing the documentation of RESTful HTTP 
 
        Retrieve list of foobars matching given id.
        
-This is very rudimentary and experimental code at the moment.
+*This is very rudimentary and experimental code at the moment.*
+
+## Installation
 
 Drop http_domain.py into your Sphinx documentation source directory and enable/add the below settings in conf.py to use:
 
