@@ -15,8 +15,8 @@ from sphinx.directives import ObjectDescription
 
 http_method_sig_re = re.compile(r'^(GET|POST|PUT|DELETE)?\s?(\S+)(.*)$')
 
-class HTTPMethod(ObjectDescription):
 
+class HTTPMethod(ObjectDescription):
     def handle_signature(self, sig, signode):
         m = http_method_sig_re.match(sig)
         if m is None:
@@ -33,9 +33,9 @@ class HTTPMethod(ObjectDescription):
             params = query.strip().split()
             for param in params:
                 signode += addnodes.desc_optional(param, param)
-            
+
         return url
-        
+
 
 class HTTPDomain(Domain):
     """HTTP language domain."""
