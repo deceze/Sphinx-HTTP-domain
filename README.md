@@ -2,7 +2,8 @@
 
 ## Description
 
-Sphinx plugin to add an HTTP domain, allowing the documentation of RESTful HTTP methods.
+Sphinx plugin to add an HTTP domain, allowing the documentation of
+RESTful HTTP methods.
 
     .. http:method:: GET /api/foo/bar/:id/:slug
 
@@ -15,11 +16,8 @@ Sphinx plugin to add an HTTP domain, allowing the documentation of RESTful HTTP 
 
 ## Installation
 
-Drop http_domain.py into your Sphinx documentation source directory and enable/add the below settings in conf.py to use:
+Run pip install sphinx-http-domain.
 
-    # If extensions (or modules to document with autodoc) are in another directory,
-    # add these directories to sys.path here. If the directory is relative to the
-    # documentation root, use os.path.abspath to make it absolute, like shown here.
-    sys.path.insert(0, os.path.abspath('.'))
+Then, add `sphinx_http_domain` to your conf.py:
 
-    extensions = ['http_domain']
+    extensions = ['sphinx_http_domain']
