@@ -7,7 +7,7 @@ setup(
     url='https://github.com/deceze/Sphinx-HTTP-domain/',
     author='David Zentgraf',
     author_email='deceze@gmail.com',
-    py_modules=['sphinx_http_domain'],
+    packages=['sphinx_http_domain'],
     requires=['Spinx'],
     zip_safe=True,
     classifiers=['Development Status :: 2 - Pre-Alpha',
