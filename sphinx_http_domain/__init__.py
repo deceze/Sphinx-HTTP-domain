@@ -8,7 +8,7 @@ import re
 from docutils import nodes
 
 from sphinx import addnodes
-from sphinx.locale import l_, _
+from sphinx.locale import l_
 from sphinx.domains import Domain, ObjType
 from sphinx.directives import ObjectDescription
 
@@ -42,13 +42,13 @@ class HTTPDomain(Domain):
     name = 'http'
     label = 'HTTP'
     object_types = {
-        'method':    ObjType(l_('method'),    'method')
+        'method': ObjType(l_('method'), 'method')
     }
     directives = {
-        'method':       HTTPMethod
+        'method': HTTPMethod
     }
     roles = {
-        # 'method':  RESTXRefRole(),
+        # 'method': RESTXRefRole(),
     }
 
 
