@@ -1,12 +1,14 @@
-# Sphinx HTTP Domain
+Sphinx HTTP Domain
+==================
 
-## Description
+Description
+-----------
 
 Sphinx plugin to add an HTTP domain, allowing the documentation of
 RESTful HTTP methods.
 
 You can document simple methods, wrap any arguments in the path
-with curly-braces:
+with curly-braces::
 
     .. http:method:: GET /api/foo/bar/{id}/{slug}
 
@@ -16,7 +18,7 @@ with curly-braces:
        Retrieve list of foobars matching given id.
 
 Query string parameters are also supported, both mandatory and
-optional:
+optional::
 
     .. http:method:: GET /api/foo/bar/?id&slug
 
@@ -25,7 +27,7 @@ optional:
 
        Search for a list of foobars matching given id.
 
-As well, you can provide types for parameters and arguments:
+As well, you can provide types for parameters and arguments::
 
     .. http:method:: GET /api/foo/bar/{id}/?slug
        
@@ -34,7 +36,7 @@ As well, you can provide types for parameters and arguments:
 
        Search for a list of foobars matching given id.
 
-Fragments are also supported:
+Fragments are also supported::
 
     .. http:method:: GET /#!/username
 
@@ -42,7 +44,7 @@ Fragments are also supported:
 
        Renders a user's profile page.
 
-Plus, you can document the responses with their response codes:
+Plus, you can document the responses with their response codes::
 
     .. http:method:: POST /api/foo/bar/
 
@@ -53,25 +55,33 @@ Plus, you can document the responses with their response codes:
 
 *This is very rudimentary and experimental code at the moment.*
 
-## Installation
 
-Run `pip install sphinx-http-domain`.
+Installation
+------------
 
-Then, add `sphinx_http_domain` to your conf.py:
+Run ``pip install sphinx-http-domain``.
+
+Then, add ``sphinx_http_domain`` to your conf.py::
 
     extensions = ['sphinx_http_domain']
 
-## Development
+
+Development
+-----------
 
 - Version: pre-Alpha
 - Homepage: https://github.com/deceze/Sphinx-HTTP-domain
 
 For contributions, please fork this project on GitHub!
 
-### Author
+
+Author
+``````
 
 David Zentgraf (https://github.com/deceze)
 
-### Contributors
+
+Contributors
+````````````
 
 - Simon Law (https://github.com/sfllaw)
