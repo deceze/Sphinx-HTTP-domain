@@ -1,6 +1,12 @@
 # -*- coding: utf-8 -*-
 """
+    sphinx.domains.http
+    ~~~~~~~~~~~~~~~~~~~
+
     The HTTP domain.
+
+    :copyright: Copyright 2011, David Zentgraf.
+    :license: BSD, see LICENSE for details
 """
 
 import re
@@ -17,7 +23,14 @@ http_method_sig_re = re.compile(r'^(GET|POST|PUT|DELETE)?\s?(\S+)(.*)$')
 
 
 class HTTPMethod(ObjectDescription):
+    """
+    Description of a general HTTP method.
+    """
     def handle_signature(self, sig, signode):
+        """
+        Transform an HTTP method signature into RST nodes.
+        Returns (method name, classname if any).
+        """
         m = http_method_sig_re.match(sig)
         if m is None:
             raise ValueError
