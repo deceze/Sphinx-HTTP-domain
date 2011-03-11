@@ -19,19 +19,25 @@ from sphinx.domains import Domain, ObjType
 from sphinx.directives import ObjectDescription
 
 
-http_method_sig_re = re.compile(r'^(GET|POST|PUT|DELETE)?\s?(\S+)(.*)$')
-
-
 class HTTPMethod(ObjectDescription):
     """
     Description of a general HTTP method.
     """
+    # RE for HTTP method signatures
+    sig_re = re.compile(
+        r'^'
+        r'(GET|POST|PUT|DELETE)?\s?'    # verb
+        r'(\S+)'                        # url
+        r'(.*)'                         # query
+        r'$'
+    )
+
     def handle_signature(self, sig, signode):
         """
         Transform an HTTP method signature into RST nodes.
         Returns (method name, classname if any).
         """
-        m = http_method_sig_re.match(sig)
+        m = sig_re.match(sig)
         if m is None:
             raise ValueError
 
