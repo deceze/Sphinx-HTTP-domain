@@ -5,12 +5,23 @@
 Sphinx plugin to add an HTTP domain, allowing the documentation of
 RESTful HTTP methods.
 
-    .. http:method:: GET /api/foo/bar/:id/:slug
+You can document simple methods, wrap any arguments in the path
+with curly-braces:
 
-       :param id: An id
-       :param slug: A slug
+    .. http:method:: GET /api/foo/bar/{id}/{slug}
+
+       :arg id: An id
+       :arg slug: A slug
 
        Retrieve list of foobars matching given id.
+
+Query string parameters are also supported:
+
+    .. http:method:: GET /api/foo/bar/?id
+
+       :param id: An id
+
+       Search for a list of foobars matching given id.
        
 *This is very rudimentary and experimental code at the moment.*
 
