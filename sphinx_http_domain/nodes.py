@@ -157,7 +157,7 @@ class desc_http_patharg(HttpNode):
 
     @staticmethod
     def visit_latex(self, node):
-        self.body.append('\emph{' +
+        self.body.append(r'\emph{' +
                          node.wrapper[0].translate(tex_escape_map))
 
     @staticmethod
@@ -283,7 +283,7 @@ class desc_http_fragment(HttpNode):
     @staticmethod
     def visit_latex(self, node):
         self.body.append(node.prefix.translate(tex_escape_map) +
-                         '\emph{')
+                         r'\emph{')
 
     @staticmethod
     def depart_latex(self, node):
