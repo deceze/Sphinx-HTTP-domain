@@ -7,6 +7,11 @@ Description
 Sphinx plugin to add an HTTP domain, allowing the documentation of
 RESTful HTTP methods.
 
+*This is very rudimentary and experimental code at the moment.*
+
+HTTP methods
+------------
+
 You can document simple methods, wrap any arguments in the path
 with curly-braces::
 
@@ -54,7 +59,23 @@ Plus, you can document the responses with their response codes::
 
        Create a foobar.
 
-*This is very rudimentary and experimental code at the moment.*
+
+HTTP responses
+--------------
+
+Documenting responses is also simple::
+
+   .. http:response:: Foobar object
+
+      A foobar object looks like this::
+
+      .. source-code:: js
+         {
+            'slug': SLUG
+         }
+   
+      :data string SLUG: A slug
+      :format: JSON
 
 
 Installation

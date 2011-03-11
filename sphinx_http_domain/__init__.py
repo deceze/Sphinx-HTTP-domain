@@ -15,16 +15,17 @@ from urlparse import urlsplit, parse_qsl
 
 from docutils.nodes import Text
 
+from sphinx import addnodes
 from sphinx.locale import l_
 from sphinx.domains import Domain, ObjType
 from sphinx.directives import ObjectDescription
 from sphinx.util.docfields import TypedField
 
-from sphinx_http_domain.docfields import ResponseField
+from sphinx_http_domain.docfields import NoArgGroupedField, ResponseField
 from sphinx_http_domain.nodes import (desc_http_method, desc_http_url,
                                       desc_http_path, desc_http_patharg,
                                       desc_http_query, desc_http_queryparam,
-                                      desc_http_fragment)
+                                      desc_http_fragment, desc_http_response)
 
 
 class HTTPMethod(ObjectDescription):
@@ -151,15 +152,59 @@ class HTTPMethod(ObjectDescription):
         return (method, url)
 
 
+class HTTPResponse(ObjectDescription):
+    """
+    Description of a general HTTP response.
+    """
+    doc_field_types = [
+        TypedField('data', label=l_('Data'),
+                   names=('data',),
+                   typenames=('datatype', 'type'),
+                   typerolename='response',
+                   can_collapse=True),
+        NoArgGroupedField('contenttype', label=l_('Content Types'),
+                          names=('contenttype', 'mimetype', 'format'),
+                          can_collapse=True),
+    ]
+
+    _slugify_strip_re = re.compile(r'[^\w\s-]')
+    _slugify_hyphenate_re = re.compile(r'[-\s]+')
+
+    def slugify(self, value):
+        """
+        Normalizes string, converts to lowercase, removes non-alpha
+        characters, and converts spaces to hyphens.
+
+        From Django's "django/template/defaultfilters.py".
+        """
+        import unicodedata
+        if not isinstance(value, unicode):
+            value = unicode(value)
+        value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore')
+        value = unicode(self._slugify_strip_re.sub('', value).strip().lower())
+        return self._slugify_hyphenate_re.sub('-', value)
+
+    def handle_signature(self, sig, signode):
+        """
+        Transform an HTTP response into RST nodes.
+        Returns the reference name.
+        """
+        name = self.slugify(sig)
+        signode += desc_http_response(name, sig)
+        return name
+
+
 class HTTPDomain(Domain):
     """HTTP language domain."""
     name = 'http'
     label = 'HTTP'
     object_types = {
-        'method': ObjType(l_('method'), 'method')
+        'method': ObjType(l_('method'), 'method'),
+        'response': ObjType(l_('response'), 'response'),
     }
     directives = {
-        'method': HTTPMethod
+        'method': HTTPMethod,
+        'response': HTTPResponse,
     }
     roles = {
         # 'method': HTTPXRefRole(),
@@ -176,3 +221,4 @@ def setup(app):
     desc_http_query.contribute_to_app(app)
     desc_http_queryparam.contribute_to_app(app)
     desc_http_fragment.contribute_to_app(app)
+    desc_http_response.contribute_to_app(app)

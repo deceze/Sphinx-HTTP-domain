@@ -3,9 +3,9 @@
     Fields for the HTTP domain.
 """
 
-from docutils.nodes import Text
+from docutils import nodes
 
-from sphinx.util.docfields import TypedField
+from sphinx.util.docfields import GroupedField, TypedField
 
 
 class ResponseField(TypedField):
@@ -107,7 +107,7 @@ class ResponseField(TypedField):
         The default status codes are provided in self.status_codes.
         """
         try:
-            return [Text(self.status_codes[fieldarg])]
+            return [nodes.Text(self.status_codes[fieldarg])]
         except KeyError:
             return []
 
@@ -117,3 +117,21 @@ class ResponseField(TypedField):
         if not content:
             content = self.default_content(fieldarg)
         return super(TypedField, self).make_entry(fieldarg, content)
+
+
+class NoArgGroupedField(GroupedField):
+    def __init__(self, *args, **kwargs):
+        super(NoArgGroupedField, self).__init__(*args, **kwargs)
+        self.has_arg = False
+
+    def make_field(self, types, domain, items):
+        if len(items) == 1 and self.can_collapse:
+            super(NoArgGroupedField, self).make_field(types, domain, items)
+        fieldname = nodes.field_name('', self.label)
+        listnode = self.list_type()
+        for fieldarg, content in items:
+            par = nodes.paragraph()
+            par += content
+            listnode += nodes.list_item('', par)
+        fieldbody = nodes.field_body('', listnode)
+        return nodes.field('', fieldname, fieldbody)

@@ -297,3 +297,32 @@ class desc_http_fragment(HttpNode):
     @staticmethod
     def depart_man(self, node):
         self.body.append(self.defs['emphasis'][1])
+
+
+class desc_http_response(HttpNode):
+    """HTTP response node."""
+
+    @staticmethod
+    def visit_html(self, node):
+        self.body.append(self.starttag(node, 'strong', '',
+                                       CLASS='deschttpresponse'))
+
+    @staticmethod
+    def depart_html(self, node):
+        self.body.append('</strong>')
+
+    @staticmethod
+    def visit_latex(self, node):
+        self.body.append(r'\textbf{')
+
+    @staticmethod
+    def depart_latex(self, node):
+        self.body.append('}')
+
+    @staticmethod
+    def visit_man(self, node):
+        self.body.append(self.defs['strong'][0])
+
+    @staticmethod
+    def depart_man(self, node):
+        self.body.append(self.defs['strong'][1])
