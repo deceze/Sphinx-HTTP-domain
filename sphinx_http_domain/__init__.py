@@ -76,19 +76,31 @@ class HTTPMethod(ObjectDescription):
         re.VERBOSE
     )
 
-    def handle_method(self, method, signode):
+    def node_from_method(self, method):
+        """Returns a ``desc_http_method`` Node from a ``method`` string."""
         if method is None:
             method = 'GET'
         method = method.upper()
-        signode += desc_http_method(method, method)
+        return desc_http_method(method, method)
 
-    def handle_url(self, url, signode):
+    def node_from_url(self, url):
+        """Returns a ``desc_http_url`` Node from a ``url`` string."""
         if url is None:
             raise ValueError
         # Split URL into path, query, and fragment
-        _, _, path, query, fragment = urlsplit(url)
+        path, query, fragment = self.split_url(url)
         urlnode = desc_http_url()
-        # Create nodes for the path
+        urlnode += self.node_from_path(path)
+        node = self.node_from_query(query)
+        if node:
+            urlnode += node
+        node = self.node_from_fragment(fragment)
+        if node:
+            urlnode += node
+        return urlnode
+
+    def node_from_path(self, path):
+        """Returns a ``desc_http_path`` Node from a ``path`` string."""
         if path:
             pathnode = desc_http_path(path)
             path_segments = self.path_re.findall(path)[:-1]
@@ -97,21 +109,31 @@ class HTTPMethod(ObjectDescription):
                 if arg:
                     arg = arg[1:-1]     # Strip off { and }
                     pathnode += desc_http_patharg(arg, arg)
-            urlnode += pathnode
+            return pathnode
         else:
             raise ValueError
-        # Create nodes for the query string
+
+    def node_from_query(self, query):
+        """Returns a ``desc_http_query`` Node from a ``query`` string."""
         if query:
             querynode = desc_http_query(query)
             query_params = query.split('&')
             for p in query_params:
                 querynode += desc_http_queryparam(p, p)
-            urlnode += querynode
-        # Create a node for the fragment
+            return querynode
+
+    def node_from_fragment(self, fragment):
+        """Returns a ``desc_http_fragment`` Node from a ``fragment`` string."""
         if fragment:
-            urlnode += desc_http_fragment(fragment, fragment)
-        # Add urlnode to signode
-        signode += urlnode
+            return desc_http_fragment(fragment, fragment)
+
+    def split_url(self, url):
+        """
+        Splits a ``url`` string into its components.
+        Returns (path, query string, fragment).
+        """
+        _, _, path, query, fragment = urlsplit(url)
+        return (path, query, fragment)
 
     def handle_signature(self, sig, signode):
         """
@@ -124,8 +146,8 @@ class HTTPMethod(ObjectDescription):
             raise ValueError
         method, url = m.groups()
         # Append nodes to signode for method and url
-        self.handle_method(method, signode)
-        self.handle_url(url, signode)
+        signode += self.node_from_method(method)
+        signode += self.node_from_url(url)
         return (method, url)
 
 
