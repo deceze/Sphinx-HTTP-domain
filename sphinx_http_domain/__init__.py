@@ -18,6 +18,7 @@ from docutils.nodes import Text
 from sphinx.locale import l_
 from sphinx.domains import Domain, ObjType
 from sphinx.directives import ObjectDescription
+from sphinx.util.docfields import TypedField
 
 from sphinx_http_domain.nodes import (desc_http_method, desc_http_url,
                                       desc_http_path, desc_http_patharg,
@@ -29,6 +30,30 @@ class HTTPMethod(ObjectDescription):
     """
     Description of a general HTTP method.
     """
+    doc_field_types = [
+        TypedField('argument', label=l_('Path arguments'),
+                   names=('arg', 'argument', 'patharg'),
+                   typenames=('argtype', 'pathargtype'),
+                   can_collapse=True),
+        TypedField('parameter', label=l_('Query params'),
+                   names=('param', 'parameter', 'queryparam'),
+                   typenames=('paramtype', 'queryparamtype'),
+                   typerolename='response',
+                   can_collapse=True),
+        TypedField('optional_parameter', label=l_('Opt. params'),
+                   names=('optparam', 'optional', 'optionalparameter'),
+                   typenames=('optparamtype',),
+                   can_collapse=True),
+        TypedField('fragment', label=l_('Fragments'),
+                   names=('frag', 'fragment'),
+                   typenames=('fragtype',),
+                   can_collapse=True),
+        TypedField('response', label=l_('Responses'),
+                   names=('resp', 'responds', 'response'),
+                   typerolename='response',
+                   can_collapse=True)
+    ]
+
     # RE for HTTP method signatures
     sig_re = re.compile(
         (
@@ -114,7 +139,8 @@ class HTTPDomain(Domain):
         'method': HTTPMethod
     }
     roles = {
-        # 'method': RESTXRefRole(),
+        # 'method': HTTPXRefRole(),
+        # 'response': HTTPXRefRole(),
     }
 
 
