@@ -50,6 +50,7 @@ Plus, you can document the responses with their response codes::
 
        :param string slug: A slug
        :response 201: A foobar was created successfully.
+       :response 400:
 
        Create a foobar.
 

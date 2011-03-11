@@ -20,6 +20,7 @@ from sphinx.domains import Domain, ObjType
 from sphinx.directives import ObjectDescription
 from sphinx.util.docfields import TypedField
 
+from sphinx_http_domain.docfields import ResponseField
 from sphinx_http_domain.nodes import (desc_http_method, desc_http_url,
                                       desc_http_path, desc_http_patharg,
                                       desc_http_query, desc_http_queryparam,
@@ -48,10 +49,10 @@ class HTTPMethod(ObjectDescription):
                    names=('frag', 'fragment'),
                    typenames=('fragtype',),
                    can_collapse=True),
-        TypedField('response', label=l_('Responses'),
-                   names=('resp', 'responds', 'response'),
-                   typerolename='response',
-                   can_collapse=True)
+        ResponseField('response', label=l_('Responses'),
+                      names=('resp', 'responds', 'response'),
+                      typerolename='response',
+                      can_collapse=True)
     ]
 
     # RE for HTTP method signatures
