@@ -8,7 +8,7 @@ setup(
     author='David Zentgraf',
     author_email='deceze@gmail.com',
     packages=['sphinx_http_domain'],
-    requires=['Spinx'],
+    requires=['Sphinx'],
     zip_safe=True,
     classifiers=['Development Status :: 2 - Pre-Alpha',
                  'Environment :: Web Environment',

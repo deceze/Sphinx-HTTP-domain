@@ -16,8 +16,23 @@ RESTful HTTP methods.
 
 ## Installation
 
-Run pip install sphinx-http-domain.
+Run `pip install sphinx-http-domain`.
 
 Then, add `sphinx_http_domain` to your conf.py:
 
     extensions = ['sphinx_http_domain']
+
+## Development
+
+- Version: pre-Alpha
+- Homepage: https://github.com/deceze/Sphinx-HTTP-domain
+
+For contributions, please fork this project on GitHub!
+
+### Author
+
+David Zentgraf (https://github.com/deceze)
+
+### Contributors
+
+- Simon Law (https://github.com/sfllaw)
