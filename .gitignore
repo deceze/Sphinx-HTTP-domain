@@ -4,3 +4,5 @@ build/
 dist/
 
 MANIFEST
+.svn/entries
+sphinx_http_domain/.svn/entries
