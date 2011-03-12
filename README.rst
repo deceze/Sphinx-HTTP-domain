@@ -59,6 +59,14 @@ Plus, you can document the responses with their response codes::
 
        Create a foobar.
 
+To refer to an HTTP method, use ``:http:method:``::
+
+    .. http:method:: GET /api/
+       :label-name: get-root
+       :title: API root
+
+    The :http:method:`get-root` contains all of the API.
+
 
 HTTP responses
 --------------
@@ -76,6 +84,12 @@ Documenting responses is also simple::
    
       :data string SLUG: A slug
       :format: JSON
+
+To refer to an HTTP response, use ``:http:response:``::
+
+   .. http:response:: Foobar object
+
+   A :http:response:`foobar-object` is returned when you foo the bar.
 
 
 Installation
