@@ -7,8 +7,6 @@ Description
 Sphinx plugin to add an HTTP domain, allowing the documentation of
 RESTful HTTP methods.
 
-*This is very rudimentary and experimental code at the moment.*
-
 HTTP methods
 ------------
 
@@ -95,6 +93,8 @@ To refer to an HTTP response, use ``:http:response:``::
 Installation
 ------------
 
+Requires Sphinx >= 1.0.6 (http://sphinx.pocoo.org).
+
 Run ``pip install sphinx-http-domain``.
 
 Then, add ``sphinx_http_domain`` to your conf.py::
@@ -105,7 +105,7 @@ Then, add ``sphinx_http_domain`` to your conf.py::
 Development
 -----------
 
-- Version: pre-Alpha
+- Version: 0.2
 - Homepage: https://github.com/deceze/Sphinx-HTTP-domain
 
 For contributions, please fork this project on GitHub!
@@ -120,4 +120,4 @@ David Zentgraf (https://github.com/deceze)
 Contributors
 ````````````
 
-- Simon Law (https://github.com/sfllaw)
+- Simon Law (https://github.com/sfllaw), who really wrote virtually all of this
