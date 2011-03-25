@@ -15,7 +15,7 @@ setup(
     author='David Zentgraf',
     author_email='deceze@gmail.com',
     packages=['sphinx_http_domain'],
-    requires=['Sphinx'],
+    requires=['Sphinx (>=1.0.7)'],
     zip_safe=True,
     classifiers=['Development Status :: 2 - Pre-Alpha',
                  'Environment :: Web Environment',
