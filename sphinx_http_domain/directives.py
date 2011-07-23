@@ -7,7 +7,7 @@
 """
 
 import re
-from urlparse import urlsplit, parse_qsl
+from urlparse import urlsplit
 
 from docutils.nodes import literal, strong, Text
 from docutils.parsers.rst import directives
@@ -23,6 +23,10 @@ from sphinx_http_domain.nodes import (desc_http_method, desc_http_url,
                                       desc_http_fragment, desc_http_response)
 from sphinx_http_domain.utils import slugify, slugify_url
 
+try:
+    from urlparse import parse_qsl
+except ImportError:
+    from cgi import parse_qsl
 
 class HTTPDescription(ObjectDescription):
     def get_anchor(self, name, sig):
