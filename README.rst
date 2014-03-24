@@ -1,3 +1,12 @@
+This package is no longer being maintained
+==========================================
+
+Please use official Sphinx extensions (http://packages.python.org/sphinxcontrib-httpdomain/)
+--------------------------------------------------------------------------------------------
+
+
+*______________________________________________________________*
+
 Sphinx HTTP Domain
 ==================
 
@@ -33,7 +42,7 @@ optional::
 As well, you can provide types for parameters and arguments::
 
     .. http:method:: GET /api/foo/bar/{id}/?slug
-       
+
        :arg integer id: An id
        :optparam string slug: A slug
 
@@ -79,7 +88,7 @@ Documenting responses is also simple::
          {
             'slug': SLUG
          }
-   
+
       :data string SLUG: A slug
       :format: JSON
 
